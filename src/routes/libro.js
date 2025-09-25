@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as libroController from '../controllers/libroController.js';
+import { runValidations, validarLibro } from "../middlewares/validators.js";
 
 const router = Router();
 
@@ -11,6 +12,6 @@ router.post('/', libroController.crearLibro);
 
 router.put('/', libroController.actualizarLibro);
 
-router.delete('/:id', libroController.eliminarLibro);
+router.delete('/:id', runValidations(validarLibro), libroController.eliminarLibro);
 
 export default router;
