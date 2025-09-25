@@ -1,3 +1,4 @@
+import { errorHandler } from "../middlewares/errorHandler.js";
 import * as autoresServices from "../services/autoresServices.js";
 
 export const getAllAutores = async (req, res, next) => {
@@ -5,7 +6,7 @@ export const getAllAutores = async (req, res, next) => {
     const autores = await autoresServices.getAllAutores();
     res.json(autores);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -20,7 +21,7 @@ export const getAutorById = async (req, res, next) => {
 
     res.json(autor);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -35,7 +36,7 @@ export const postCrearAutor = async (req, res, next) => {
     );
     res.status(201).json(newAutor);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -61,7 +62,7 @@ export const putActualizarAutor = async (req, res, next) => {
       autor: result.rows[0],
     });
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -71,7 +72,7 @@ export const eliminarAutor = async (req, res, next) => {
     const result = await autoresServices.eliminarAutor(id_autor);
     res.json(result);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -81,7 +82,7 @@ export const getBuscarPorNombre = async (req, res, next) => {
     const autores = await autoresServices.buscarAutorPorNombre(nombre);
     res.json(autores);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -91,6 +92,6 @@ export const getBuscarPorNacionalidad = async (req, res, next) => {
     const autores = await autoresServices.buscarAutorPorNacionalidad(nacionalidad);
     res.json(autores);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };

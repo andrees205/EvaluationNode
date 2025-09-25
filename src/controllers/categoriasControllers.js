@@ -5,7 +5,7 @@ export const getAllCategorias = async (req, res, next) => {
     const categorias = await categoriasServices.getAllCategorias();
     res.json(categorias);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -18,7 +18,7 @@ export const getCategoriaById = async (req, res, next) => {
 
     res.json(categoria);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -31,7 +31,7 @@ export const postCrearCategoria = async (req, res, next) => {
     );
     res.status(201).json(newCategoria);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -51,7 +51,7 @@ export const putActualizarCategoria = async (req, res, next) => {
 
     res.json({ message: "Categoría actualizada correctamente", categoria: result.rows[0] });
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -61,7 +61,7 @@ export const eliminarCategoria = async (req, res, next) => {
     const result = await categoriasServices.eliminarCategoria(id_categoria);
     res.json(result);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -71,7 +71,7 @@ export const getBuscarPorNombre = async (req, res, next) => {
     const categorias = await categoriasServices.buscarCategoriaPorNombre(nombre_categoria);
     res.json(categorias);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
 
@@ -81,6 +81,6 @@ export const getBuscarPorClasificacion = async (req, res, next) => {
     const categorias = await categoriasServices.buscarCategoriaPorClasificacion(clasificacion);
     res.json(categorias);
   } catch (err) {
-    next(err);
+    errorHandler(err);
   }
 };
