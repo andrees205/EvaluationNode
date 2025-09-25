@@ -1,6 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import librosRouter from './routes/libro.js';
+import autoresRouter from './routes/autoresRoutes.js';
+import categoriasRouter from './routes/categoriasRoutes.js';
+
 import { errorHandler } from './middlewares/errorHandler.js';
 dotenv.config();
 
@@ -13,6 +16,8 @@ app.get('/', (req, res) => {
 });
     
 app.use('/libros', librosRouter);
+app.use('/autores', autoresRouter);
+app.use('/categorias', categoriasRouter);
 
 app.use(errorHandler);
 
