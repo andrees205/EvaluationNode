@@ -2,14 +2,12 @@ import { pool } from '../db.js';
 
 export const obtenerTodosLosLibros = async (req, res) => {
         const result = await pool.query('SELECT * FROM libros');
-        res.json(result.rows);
+        return result.rows;
 };
-
-export const obtenerLibroPorId = async (req, res) => {
-    const { id } = req.params;
-        const result = await pool.query("SELECT * FROM libros WHERE id_libro = $1", [id]);
-        if (result.rowCount === 0) return res.status(404).json({ message: "Libro no encontrado" });
-        res.json(result.rows[0]);
+export const obtenerLibroPorId = async (id) => {
+    const result = await pool.query("SELECT * FROM libros WHERE id_libro = $1", [id]);
+    if (result.rowCount === 0) return null;
+    return result.rows[0];
 };
 
 export const crearLibro = async (titulo, anio_publicacion, autor_id, categoria_id, resumen) => {
@@ -55,16 +53,6 @@ export const buscarLibrosPorAutor = async (autor_id) => {
 export const buscarLibrosPorCategoria = async (categoria_id) => {
     const result = await pool.query(
         "SELECT * FROM libros WHERE categoria_id = $1", [categoria_id]
-    );
-    return result.rows;
-};
-
-export const buscarLibrosPorClasificacion = async (clasificacion) => {
-    const result = await pool.query(
-        `SELECT l.* 
-         FROM libros l 
-         JOIN categorias c ON l.categoria_id = c.id_categoria 
-         WHERE c.clasificacion = $1`, [clasificacion]
     );
     return result.rows;
 };
