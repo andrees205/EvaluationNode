@@ -12,11 +12,11 @@ export const obtenerLibroPorId = async (req, res) => {
         res.json(result.rows[0]);
 };
 
-export const crearLibro = async (id_libro, titulo, anio_publicacion, autor_id, categoria_id, resumen) => {
+export const crearLibro = async (titulo, anio_publicacion, autor_id, categoria_id, resumen) => {
         const query = `INSERT INTO libros
         (id_libro, titulo, anio_publicacion, autor_id, categoria_id, resumen)
-        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;`;
-        const result = await pool.query(query, [id_libro, titulo, anio_publicacion, autor_id, categoria_id, resumen]);
+        VALUES (gen_random_uuid(), $1, $2, $3, $4, $5) RETURNING *;`;
+        const result = await pool.query(query, [titulo, anio_publicacion, autor_id, categoria_id, resumen]);
         return result.rows[0];
 };
 
