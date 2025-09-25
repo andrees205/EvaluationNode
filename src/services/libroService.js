@@ -21,7 +21,6 @@ export const crearLibro = async (id_libro, titulo, anio_publicacion, autor_id, c
         return result.rows[0];
 };
 
-
 export const actualizarLibro = async (libro) => {
     const query = `UPDATE libros 
                    SET titulo=$1, anio_publicacion=$2, autor_id=$3, categoria_id=$4, resumen=$5
