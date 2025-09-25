@@ -22,9 +22,9 @@ export const obtenerLibroPorId = async (req, res) => {
 };
 
 export const crearLibro = async (req, res) => {
-    const { id_libro, titulo, anio_publicacion, autor_id, categoria_id, resumen } = req.body;
+    const {titulo, anio_publicacion, autor_id, categoria_id, resumen } = req.body;
     try {
-        const result = await libroService.crearLibro(id_libro, titulo, anio_publicacion, autor_id, categoria_id, resumen);
+        const result = await libroService.crearLibro(titulo, anio_publicacion, autor_id, categoria_id, resumen);
         res.status(201).json(result);
     } catch (err) {
         errorHandler(err, req, res);
