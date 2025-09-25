@@ -1,5 +1,4 @@
 import { pool } from '../db.js';
-import { errorHandler } from '../middlewares/errorHandler.js';
 
 export const obtenerTodosLosLibros = async (req, res) => {
         const result = await pool.query('SELECT * FROM libros');
@@ -38,3 +37,35 @@ export const eliminarLibro = async (id_libro) => {
         await pool.query("DELETE FROM libros WHERE id_libro=$1", [id_libro]);
         return { message: "Libro eliminado correctamente", libro: libroEliminar.rows[0] };
 };
+
+export const buscarLibrosPorAnio = async (anio) => {
+    const result = await pool.query(
+        "SELECT * FROM libros WHERE anio_publicacion = $1", [anio]
+    );
+    return result.rows;
+};
+
+export const buscarLibrosPorAutor = async (autor_id) => {
+    const result = await pool.query(
+        "SELECT * FROM libros WHERE autor_id = $1", [autor_id]
+    );
+    return result.rows;
+};
+
+export const buscarLibrosPorCategoria = async (categoria_id) => {
+    const result = await pool.query(
+        "SELECT * FROM libros WHERE categoria_id = $1", [categoria_id]
+    );
+    return result.rows;
+};
+
+export const buscarLibrosPorClasificacion = async (clasificacion) => {
+    const result = await pool.query(
+        `SELECT l.* 
+         FROM libros l 
+         JOIN categorias c ON l.categoria_id = c.id_categoria 
+         WHERE c.clasificacion = $1`, [clasificacion]
+    );
+    return result.rows;
+};
+
