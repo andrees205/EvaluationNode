@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import librosRouter from './routes/libro.js';
+import librosRouter from './routes/librosRoutes.js';
 import autoresRouter from './routes/autoresRoutes.js';
 import categoriasRouter from './routes/categoriasRoutes.js';
 
